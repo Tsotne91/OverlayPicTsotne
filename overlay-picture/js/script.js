@@ -1,6 +1,6 @@
 // "use strict";
 $(document).ready(function(){
-	alert(“hello”);
+	alert(hello);
 });
 class PictureOverlay {
 	constructor(wrapper, overlayDiv, line){
@@ -22,8 +22,8 @@ class PictureOverlay {
 	overlay(event){
 		if(this.isInWrapper(event.clientX, event.clientY))
 			this.changeCirclePosition(event.clientX)
-		}
-	
+	}
+
 
 	changeCirclePosition(x) {
 		const circlePosition = x - this.wrapper.offsetLeft;
