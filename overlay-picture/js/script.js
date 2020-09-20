@@ -1,4 +1,7 @@
-"use strict";
+// "use strict";
+$(document).ready(function(){
+	alert(“hello”);
+});
 class PictureOverlay {
 	constructor(wrapper, overlayDiv, line){
 		this.wrapper = document.getElementById(wrapper);
@@ -19,8 +22,8 @@ class PictureOverlay {
 	overlay(event){
 		if(this.isInWrapper(event.clientX, event.clientY))
 			this.changeCirclePosition(event.clientX)
-		}
-	
+	}
+
 
 	changeCirclePosition(x) {
 		const circlePosition = x - this.wrapper.offsetLeft;
@@ -31,4 +34,5 @@ class PictureOverlay {
 
 const circle = document.getElementById("circle");
 let pictureOverlay = new PictureOverlay("pictures-wrapper", "overlay", "line");
+// $("circle").mousedown( function (event) {pictureOverlay.overlay(event)})
 circle.addEventListener("drag", function (event) {pictureOverlay.overlay(event)});
