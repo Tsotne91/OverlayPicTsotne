@@ -32,8 +32,7 @@ class PictureOverlay {
 
 // $("circle").mousedown( function (event) {pictureOverlay.overlay(event)})
 $(document).ready(function(){
-	const circle = $("circle");
-	$("circle").on("drag", changeCirclePosition (event) {pictureOverlay.overlay(event)});
+	let pictureOverlay = new PictureOverlay("pictures-wrapper", "overlay", "line");
+	$("#circle").on("drag", function(event) {pictureOverlay.overlay(event)});
 });
 
-let pictureOverlay = new PictureOverlay("pictures-wrapper", "overlay", "line");
