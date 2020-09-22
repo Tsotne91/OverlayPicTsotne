@@ -2,16 +2,17 @@
 
 class PictureOverlay {
 	constructor(wrapper, overlayDiv, line){
-		this.wrapper = document.getElementById(wrapper);
-		this.overlayDiv = document.getElementById(overlayDiv);
-		this.line = document.getElementById(line);
+		this.$wrapper = $(wrapper);
+		this.$overlayDiv = $(overlayDiv);
+		this.$line = $(line);
 	}
 
 	isInWrapper(x, y) {
-		const rightEdge = this.wrapper.offsetLeft + this.wrapper.clientWidth;
-		const leftEdge = this.wrapper.offsetLeft;
-		const topEdge = this.wrapper.offsetTop;
-		const bottomEdge = this.wrapper.offsetTop + this.wrapper.clientHeight;
+		const offset = this.$wrapper.offset();
+		const rightEdge = offset.left + this.$wrapper.width();
+		const leftEdge = offset.left;
+		const topEdge = offset.top;
+		const bottomEdge = offset.top + this.$wrapper.height();
 
 		return x >= leftEdge && x <= rightEdge
 			&& y >= topEdge && y <= bottomEdge;
@@ -24,15 +25,15 @@ class PictureOverlay {
 
 
 	changeCirclePosition(x) {
-		const circlePosition = x - this.wrapper.offsetLeft;
-		this.line.style.left = circlePosition +"px";
-		this.overlayDiv.style.width = (circlePosition -this.line.clientWidth/2+"px");
+		const circlePosition = x - this.$wrapper.offset().left;
+		this.$line.css('left', circlePosition +"px");
+		this.$overlayDiv.css('width', circlePosition -this.$line.width()/2+"px");
 	}
 }
 
-// $("circle").mousedown( function (event) {pictureOverlay.overlay(event)})
-$(document).ready(function(){
-	let pictureOverlay = new PictureOverlay("pictures-wrapper", "overlay", "line");
-	$("#circle").on("drag", function(event) {pictureOverlay.overlay(event)});
-});
+const circle = $("#circle");
+let pictureOverlay = new PictureOverlay("#pictures-wrapper", "#overlay", "#line");
 
+circle.on("drag", function (event) {
+	pictureOverlay.overlay(event);
+});
